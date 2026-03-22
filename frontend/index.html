@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mychat v9 — Secure Messenger</title>
+  <meta name="description" content="Mychat v9 — End-to-end encrypted private messaging with zero knowledge server."/>
+  <meta name="theme-color" content="#0d0d16"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=9a"/>
+</head>
+<body data-page="auth">
+
+<div id="toast-container"></div>
+
+<div class="auth-page">
+  <!-- Left — branding -->
+  <aside class="auth-brand">
+    <div class="brand-glow"></div>
+    <div class="brand-logo">Mc</div>
+    <h1 class="brand-title">Mychat v9</h1>
+    <p class="brand-sub">Zero-knowledge. End-to-end encrypted.<br/>Private keys never leave your device.</p>
+    <ul class="brand-features">
+      <li>✓ Contact requests by username</li>
+      <li>✓ E2EE direct messages</li>
+      <li>✓ Read receipts + typing indicators</li>
+      <li>✓ Voice notes &amp; reactions</li>
+      <li>✓ Groups &amp; permanent rooms</li>
+      <li>✓ QR code friend scanner</li>
+    </ul>
+  </aside>
+
+  <!-- Right — auth forms -->
+  <main class="auth-panel">
+    <div class="auth-box">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login">Sign In</button>
+        <button class="auth-tab" id="tab-register">Register</button>
+        <button class="auth-tab" id="tab-recover">Recovery</button>
+      </div>
+
+      <!-- Login -->
+      <div id="login-panel" class="auth-form-panel" style="display:flex;">
+        <form id="login-form" class="auth-form" novalidate>
+          <div id="login-error" class="auth-error" style="display:none;"></div>
+          <div class="form-group">
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" class="input-field" placeholder="your_username" autocomplete="username" required/>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" class="input-field" placeholder="Min 8 chars" autocomplete="current-password" required/>
+          </div>
+          <button type="submit" id="login-btn" class="btn btn-primary w-100">Sign In</button>
+        </form>
+      </div>
+
+      <!-- Register -->
+      <div id="register-panel" class="auth-form-panel" style="display:none;">
+        <form id="register-form" class="auth-form" novalidate>
+          <div id="reg-error" class="auth-error" style="display:none;"></div>
+          <div class="form-group">
+            <label for="reg-username">Username</label>
+            <input type="text" id="reg-username" class="input-field" placeholder="3-32 chars, a-z 0-9 _" autocomplete="off" required/>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" class="input-field" placeholder="Min 8 chars" autocomplete="new-password" required/>
+          </div>
+          <p class="auth-note">On registration, a 3-word recovery phrase will be shown once. Save it — it cannot be recovered.</p>
+          <button type="submit" id="reg-btn" class="btn btn-primary w-100">Create Account</button>
+        </form>
+      </div>
+
+      <!-- Recovery -->
+      <div id="recover-panel" class="auth-form-panel" style="display:none;">
+        <form id="recover-form" class="auth-form" novalidate>
+          <div id="rec-error" class="auth-error" style="display:none;"></div>
+          <div class="form-group">
+            <label for="rec-username">Username</label>
+            <input type="text" id="rec-username" class="input-field" placeholder="your_username" autocomplete="off"/>
+          </div>
+          <div class="form-group">
+            <label for="rec-phrase">Recovery Phrase</label>
+            <input type="text" id="rec-phrase" class="input-field" placeholder="word-word-word" autocomplete="off"/>
+          </div>
+          <div class="form-group">
+            <label for="rec-newpass">New Password</label>
+            <input type="password" id="rec-newpass" class="input-field" placeholder="Min 8 chars" autocomplete="new-password"/>
+          </div>
+          <button type="submit" id="rec-btn" class="btn btn-primary w-100">Recover Account</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Recovery Phrase Modal -->
+<div class="modal-backdrop" id="recovery-modal">
+  <div class="modal-box" style="text-align:center; max-width:380px;">
+    <div style="font-size:2.5rem;margin-bottom:1rem;">🔑</div>
+    <div class="modal-title">Save Your Recovery Phrase</div>
+    <div class="modal-subtitle">This is shown <strong>once only</strong>. Screenshot or write it down.</div>
+    <div id="recovery-phrase-display" style="margin:1.5rem 0; font-size:1.4rem; font-weight:700; letter-spacing:2px; color:#00c850; word-break:break-all;"></div>
+    <button class="btn btn-primary w-100" id="recovery-confirm-btn">I've saved my phrase →</button>
+  </div>
+</div>
+
+<script src="assets/js/config.js?v=9a"></script>
+<script src="assets/js/session.js?v=9a"></script>
+<script src="assets/js/crypto.js?v=9a"></script>
+<script src="assets/js/app.js?v=9a"></script>
+</body>
+</html>

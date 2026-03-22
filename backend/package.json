@@ -1,0 +1,24 @@
+{
+  "name": "mychat-v9-backend",
+  "version": "9.0.0",
+  "description": "Mychat v9 — zero-trust E2EE backend",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "node-cron": "^3.0.3",
+    "pg": "^8.11.3",
+    "socket.io": "^4.6.2",
+    "zod": "^3.22.4"
+  }
+}

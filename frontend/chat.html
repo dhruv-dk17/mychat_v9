@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mychat v9 — App</title>
+  <meta name="theme-color" content="#0d0d16"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=9a"/>
+  <link rel="stylesheet" href="assets/css/chat.css?v=9a"/>
+</head>
+<body data-page="chat">
+
+<div id="toast-container"></div>
+
+<div class="app-layout">
+
+  <!-- Left nav rail -->
+  <nav class="app-nav">
+    <div class="nav-brand">Mc</div>
+    <button class="nav-item active" id="nav-chats-btn" title="Chats">💬</button>
+    <button class="nav-item" id="nav-contacts-btn" title="Contacts">👥</button>
+    <button class="nav-item" id="nav-settings-btn" title="Settings">⚙️</button>
+    <div class="nav-spacer"></div>
+    <button class="nav-item danger" id="nav-logout-btn" title="Logout">⏻</button>
+    <div class="nav-avatar" id="nav-avatar">U</div>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="chat-list-column">
+    <div class="chat-list-header">
+      <div class="sidebar-section-title" id="sidebar-section-title">Chats</div>
+      <div class="search-box">
+        <input type="text" id="sidebar-search" placeholder="Search..." autocomplete="off"/>
+      </div>
+    </div>
+    <div class="chat-list-content" id="sidebar-chat-list"></div>
+    <div class="chat-list-footer">
+      <button class="btn btn-primary w-100" id="sidebar-new-chat">+ New</button>
+    </div>
+  </aside>
+
+  <!-- Main chat area -->
+  <div class="chat-window-column">
+
+    <!-- Placeholder / Hero -->
+    <div id="chat-placeholder" class="chat-placeholder">
+      <div class="dashboard-hero-card">
+        <div class="dashboard-hero-kicker">Mychat v9</div>
+        <h2 class="dashboard-hero-title" id="dashboard-hero-title">Welcome back</h2>
+        <p class="dashboard-hero-text">Your messages are end-to-end encrypted. The server sees only ciphertext.</p>
+        <div class="dashboard-hero-meta">
+          <span class="dashboard-hero-badge" id="hero-contacts-badge">0 contacts</span>
+          <span class="dashboard-hero-badge" id="hero-rooms-badge">0 rooms</span>
+        </div>
+        <div id="profile-qr" style="display:flex;justify-content:center;margin-top:1rem;"></div>
+      </div>
+    </div>
+
+    <!-- Active Chat View -->
+    <div id="chat-active-view" class="chat-layout" style="display:none;">
+
+      <header id="top-bar">
+        <div class="top-bar-left">
+          <button class="btn-icon" id="back-btn" title="Back">←</button>
+          <div>
+            <div id="chat-contact-name" style="font-weight:600;font-size:1rem;"></div>
+            <div id="chat-contact-status" style="font-size:0.75rem;color:#888;"></div>
+          </div>
+        </div>
+        <div class="top-bar-right">
+          <span id="online-count" style="font-size:0.8rem;opacity:0.6;"></span>
+          <span class="badge badge-green" id="host-badge" style="display:none;">Host</span>
+        </div>
+      </header>
+
+      <!-- typing -->
+      <div id="typing-indicator" style="display:none; padding:0.35rem 1rem; font-size:0.8rem; color:#888; align-items:center; gap:0.4rem;">
+        <span id="typing-name"></span> is typing...
+      </div>
+
+      <!-- reply bar -->
+      <div id="reply-bar" style="display:none; padding:0.4rem 1rem; background:var(--surface2); border-left:3px solid #00c850; font-size:0.83rem; align-items:center; gap:0.5rem;">
+        <span id="reply-preview" style="flex:1; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"></span>
+        <button id="reply-cancel-btn" class="btn-icon" style="font-size:0.9rem;">✕</button>
+      </div>
+
+      <div id="chat-feed" style="flex:1; overflow-y:auto; padding:1rem;" role="log" aria-live="polite"></div>
+
+      <footer id="input-bar">
+        <div class="input-row">
+          <button class="btn-icon" id="mic-btn" title="Voice note">🎙</button>
+          <textarea id="msg-input" placeholder="Message..." rows="1" autocomplete="off" spellcheck="true"></textarea>
+          <button id="send-btn" class="btn btn-primary" style="padding:0.55rem 1rem;">Send</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- New Chat Modal -->
+<div class="modal-backdrop" id="new-chat-modal">
+  <div class="modal-box" style="width:300px;">
+    <div class="modal-title">Start New Chat</div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:1rem;">
+      <button class="btn btn-ghost w-100" id="btn-new-group">New Group Chat</button>
+      <hr style="border-color:rgba(255,255,255,0.08);"/>
+      <label class="sidebar-label" for="new-room-slug">Permanent Room</label>
+      <input type="text" class="input-field" id="new-room-slug" placeholder="Room ID" maxlength="32"/>
+      <input type="password" class="input-field" id="new-room-password" placeholder="Room password"/>
+      <button class="btn btn-primary w-100" id="btn-create-room">Create Room</button>
+      <button class="btn btn-ghost w-100" id="btn-join-room">Join Room</button>
+      <hr style="border-color:rgba(255,255,255,0.08);"/>
+      <label class="sidebar-label" for="new-contact-username">Add Contact</label>
+      <input type="text" class="input-field" id="new-contact-username" placeholder="username" maxlength="32"/>
+      <div style="display:flex;gap:0.5rem;">
+        <button class="btn btn-ghost w-100" id="btn-add-contact">Send Request</button>
+        <button class="btn btn-ghost" id="btn-scan-qr" title="Scan QR">📷</button>
+      </div>
+    </div>
+    <button class="btn btn-ghost" style="position:absolute;top:8px;right:8px;border:none;" onclick="hideModal('new-chat-modal')">✕</button>
+  </div>
+</div>
+
+<!-- QR Scanner Modal -->
+<div class="modal-backdrop" id="qr-scan-modal">
+  <div class="modal-box" style="text-align:center;max-width:340px;">
+    <div class="modal-title">Scan Friend's QR</div>
+    <video id="qr-video" style="width:100%;border-radius:12px;background:#000;" playsinline></video>
+    <button class="btn btn-ghost w-100" style="margin-top:1rem;" onclick="hideModal('qr-scan-modal')">Cancel</button>
+  </div>
+</div>
+
+<!-- Scripts — order matters -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qr-creator/1.0.0/qr-creator.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdn.socket.io/4.6.2/socket.io.min.js"></script>
+<script src="assets/js/config.js?v=9a"></script>
+<script src="assets/js/session.js?v=9a"></script>
+<script src="assets/js/crypto.js?v=9a"></script>
+<script src="assets/js/chat-socket.js?v=9a"></script>
+<script src="assets/js/chat.js?v=9a"></script>
+<script src="assets/js/dashboard.js?v=9a"></script>
+</body>
+</html>
