@@ -1,8 +1,12 @@
-# render.yaml — Mychat v9 Blueprint
+# render.yaml — Mychat v9 Blueprint (Card-Free Version)
+# This blueprint only provisions the Web Service. 
+# Databases often require card verification on Render; use an external one (Supabase/Neon) for 100% free hosting.
+
 services:
   - type: web
     name: mychat-v9-backend
     runtime: node
+    plan: free # Ensures the Free Tier is used
     buildCommand: "cd backend && npm install"
     startCommand: "node backend/src/server.js"
     envVars:
@@ -11,18 +15,10 @@ services:
       - key: PORT
         value: 3001
       - key: DATABASE_URL
-        fromDatabase:
-          name: mychat-v9-db
-          property: connectionString
+        sync: false # User will paste their Supabase/Neon URL here
       - key: DB_SSL
         value: "true"
       - key: ADMIN_SECRET
         generateValue: true
       - key: FRONTEND_URL
-        value: https://mychat-v9.web.app # Update this after Firebase deploy
-
-databases:
-  - name: mychat-v9-db
-    plan: free # Change to starter/standard for production
-    databaseName: mychat_v9
-    user: mychat_admin
+        value: https://mychat-v9.web.app
