@@ -1,0 +1,159 @@
+/* biolume.css — Mychat v9 "Cosmic Jellyfish" Theme */
+:root {
+  --bg:           #02040b;
+  --surface1:     rgba(8, 12, 28, 0.4);
+  --surface2:     rgba(15, 20, 45, 0.3);
+  --surface-high: rgba(20, 30, 70, 0.5);
+  --accent:       #00f2ff; /* Biolume Cyan */
+  --accent-glow:  rgba(0, 242, 255, 0.3);
+  --accent-alt:   #ff00ff; /* Electric Magenta */
+  --text:         #e0e7ff;
+  --text-muted:   #818cf8;
+  --glass-border: rgba(99, 102, 241, 0.15);
+  --r-auth:       32px;
+}
+
+body {
+  background: var(--bg);
+  background-image: 
+    radial-gradient(circle at 5% 5%, rgba(0, 242, 255, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 95% 95%, rgba(255, 0, 255, 0.08) 0%, transparent 40%),
+    url('../img/cosmic_jellyfish_hero_1774186610567.png'); /* Temporarily use path if it was copied, but usually I link the relative path */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── Glow Layers ───────────────────────────────────────────────────────── */
+.auth-box {
+  background: var(--surface1) !important;
+  backdrop-filter: blur(40px) saturate(150%);
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow) !important;
+  border-radius: var(--r-auth) !important;
+  position: relative;
+  overflow: hidden;
+  animation: floatUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-box::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  background: linear-gradient(135deg, var(--accent), transparent, var(--accent-alt));
+  z-index: -1;
+  opacity: 0.15;
+  filter: blur(4px);
+}
+
+/* ── Branding ──────────────────────────────────────────────────────────── */
+.brand-logo {
+  background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%) !important;
+  color: #fff !important;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -1px;
+  box-shadow: 0 0 20px var(--accent-glow) !important;
+  position: relative;
+}
+
+.brand-logo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 15px var(--accent);
+  opacity: 0.5;
+  animation: pulseBright 2s infinite ease-in-out;
+}
+
+.brand-title {
+  background: linear-gradient(to bottom, #fff, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background: rgba(0, 242, 255, 0.1) !important;
+  border: 1px solid var(--accent) !important;
+  color: var(--accent) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 10px var(--accent-glow) !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem !important;
+  transition: all 0.4s ease !important;
+}
+
+.btn-primary:hover {
+  background: var(--accent) !important;
+  color: #000 !important;
+  box-shadow: 0 0 30px var(--accent) !important;
+  transform: translateY(-3px);
+}
+
+/* ── Chat Feed ─────────────────────────────────────────────────────────── */
+.bubble {
+  border: 1px solid var(--glass-border) !important;
+  backdrop-filter: blur(10px);
+  animation: biolumeEnter 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.bubble.mine {
+  background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 100, 255, 0.1)) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+  box-shadow: 0 5px 15px rgba(0, 242, 255, 0.1) !important;
+}
+
+.bubble.theirs {
+  background: rgba(255, 255, 255, 0.03) !important;
+  color: var(--text-muted) !important;
+}
+
+/* ── Interactive Particle Container ─────────────────────────────────────── */
+#bio-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────────────── */
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(50px) rotateX(10deg); }
+  100% { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+
+@keyframes pulseBright {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes biolumeEnter {
+  0% { opacity: 0; transform: scale(0.9) translateX(10px); filter: blur(5px); }
+  100% { opacity: 1; transform: scale(1) translateX(0); filter: blur(0); }
+}
+
+/* ── Navigation ─────────────────────────────────────────────────────────── */
+.app-nav {
+  background: rgba(2, 4, 11, 0.9) !important;
+  border-right: 1px solid var(--glass-border) !important;
+}
+
+.nav-item.active {
+  color: var(--accent) !important;
+  text-shadow: 0 0 10px var(--accent);
+}
+
+.app-nav::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+}

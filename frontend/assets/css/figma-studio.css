@@ -1,0 +1,191 @@
+/* figma-studio.css — Mychat v9 Premium Professional UI */
+:root {
+  --bg:           #0f172a; /* Slate 900 */
+  --surface1:     #1e293b; /* Slate 800 */
+  --surface2:     #334155; /* Slate 700 */
+  --accent:       #6366f1; /* Indigo 500 */
+  --accent-soft:  rgba(99, 102, 241, 0.12);
+  --accent-bright:#818cf8; /* Indigo 400 */
+  --text:         #f8fafc; /* Slate 50 */
+  --text-muted:   #94a3b8; /* Slate 400 */
+  --border:       rgba(255, 255, 255, 0.08); /* Hairline */
+  --shadow-sm:    0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md:    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl:    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --r-auth:       24px;
+  --r-btn:        12px;
+}
+
+body {
+  background: var(--bg);
+  background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, var(--bg) 50%);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Professional Card Style ───────────────────────────────────────────── */
+.auth-box {
+  background: var(--surface1) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-auth) !important;
+  padding: 3rem !important;
+  box-shadow: var(--shadow-xl) !important;
+  animation: figmaSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-tabs {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border: 1px solid var(--border);
+  padding: 6px !important;
+  border-radius: 12px !important;
+}
+
+.auth-tab {
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+}
+
+.auth-tab.active {
+  background: var(--accent) !important;
+  color: #fff !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ── Typography & Branding ─────────────────────────────────────────────── */
+.brand-title {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  color: #fff !important;
+  line-height: 1.1;
+}
+
+.brand-logo {
+  background: var(--accent) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.4);
+}
+
+.brand-features li {
+  color: var(--text-muted) !important;
+  font-size: 0.82rem !important;
+  padding: 4px 0;
+}
+
+/* ── Form Inputs ───────────────────────────────────────────────────────── */
+.input-field {
+  background: rgba(15, 23, 42, 0.4) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1rem !important;
+  transition: all 0.25s ease !important;
+}
+
+.input-field:focus {
+  border-color: var(--accent) !important;
+  background: rgba(15, 23, 42, 0.6) !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15) !important;
+  outline: none;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-radius: var(--r-btn) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.25) !important;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-primary:hover {
+  background: var(--accent-bright) !important;
+  box-shadow: 0 12px 20px -4px rgba(99, 102, 241, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+/* ── Chat Feed ─────────────────────────────────────────────────────────── */
+.app-layout {
+  background: var(--bg) !important;
+}
+
+.app-nav {
+  background: var(--surface1) !important;
+  border-right: 1px solid var(--border) !important;
+  width: 72px !important;
+}
+
+.chat-list-column {
+  background: #0f172a !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+.bubble {
+  border-radius: 14px !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  padding: 10px 14px !important;
+  border: 1px solid var(--border) !important;
+  animation: figmaFadeScale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bubble.mine {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.bubble.theirs {
+  background: var(--surface1) !important;
+}
+
+.chat- Feed {
+  gap: 12px !important;
+  padding: 2rem !important;
+}
+
+/* ── Dashboard Hero ─────────────────────────────────────────────────────── */
+.dashboard-hero-card {
+  background: var(--surface1) !important;
+  border: 1px solid var(--border) !important;
+  padding: 3.5rem !important;
+  border-radius: 32px !important;
+  text-align: center;
+}
+
+.dashboard-hero-title {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.05em !important;
+}
+
+.dashboard-hero-text {
+  max-width: 480px;
+  margin: 1.5rem auto !important;
+  color: var(--text-muted);
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────────────── */
+@keyframes figmaSlideIn {
+  0% { transform: translateY(20px) scale(0.98); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes figmaFadeScale {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Scrollbars ────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
