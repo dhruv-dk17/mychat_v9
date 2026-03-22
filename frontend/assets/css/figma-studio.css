@@ -64,9 +64,12 @@ body {
 }
 
 .brand-logo {
-  background: var(--accent) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.4);
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 18px !important;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
 }
 
 .brand-features li {
